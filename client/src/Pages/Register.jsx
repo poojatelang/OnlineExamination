@@ -4,23 +4,34 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";  // Import useNavigate for redirection
+import { useNavigate } from "react-router-dom";
 import { registerRequest } from "../Redux/slices/Student";
-import { toast } from "react-toastify";  // Import Toastify
-// import "react-toastify/dist/ReactToastify.css";  // Import Toastify CSS
-
+import { toast } from "react-toastify";
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  password: yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
-  age: yup.number().typeError("Age must be a number").required("Age is required"),
-  phoneNumber: yup.string().matches(/^\d{10}$/, "Phone number must be 10 digits").required("Phone number is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  age: yup
+    .number()
+    .typeError("Age must be a number")
+    .required("Age is required"),
+  phoneNumber: yup
+    .string()
+    .matches(/^\d{10}$/, "Phone number must be 10 digits")
+    .required("Phone number is required"),
 });
 
 const Register = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();  // Use navigate for redirection
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const navigate = useNavigate();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       name: "",
@@ -33,7 +44,7 @@ const Register = () => {
     },
   });
 
-  const [image, setImage] = useState("");  // Controlled value (empty string instead of null)
+  const [image, setImage] = useState("");
   const [imageError, setImageError] = useState("");
 
   const handleImageUpload = (event) => {
@@ -54,22 +65,13 @@ const Register = () => {
   };
 
   const onSubmit = (data) => {
-    // dispatch registration action
     dispatch(registerRequest(data));
-
-    // Show success toast
-    // toast.success("Registration successful!");
-
-    // Check if token exists in localStorage
-
-    // Add delay before checking the token and navigating
     setTimeout(() => {
       const token = localStorage.getItem("token");
       if (token) {
-        navigate("/instruction");  // Redirect to instruction page
+        navigate("/instruction");
       }
-    }, 2000);  // Wait for 2 seconds before checking the token
-  
+    }, 2000); // Wait for 2 seconds before checking the token
   };
 
   return (
@@ -78,45 +80,128 @@ const Register = () => {
         Register
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller name="name" control={control} render={({ field }) => (
-          <TextField {...field} label="Name" fullWidth margin="normal"value={field.value ?? ""} error={!!errors.name} helperText={errors.name?.message} />
-        )} />
-        
-        <Controller name="email" control={control} render={({ field }) => (
-          <TextField {...field} label="Email" type="email" fullWidth value={field.value ?? ""}margin="normal" error={!!errors.email} helperText={errors.email?.message} />
-        )} />
+        <Controller
+          name="name"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Name"
+              fullWidth
+              margin="normal"
+              value={field.value ?? ""}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+            />
+          )}
+        />
 
-        <Controller name="password" control={control} render={({ field }) => (
-          <TextField {...field} label="Password" type="password"value={field.value ?? ""} fullWidth margin="normal" error={!!errors.password} helperText={errors.password?.message} />
-        )} />
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Email"
+              type="email"
+              fullWidth
+              value={field.value ?? ""}
+              margin="normal"
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+          )}
+        />
 
-        <Controller name="confirmPassword" control={control} render={({ field }) => (
-          <TextField {...field} label="Confirm Password"value={field.value ?? ""} type="password" fullWidth margin="normal" />
-        )} />
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Password"
+              type="password"
+              value={field.value ?? ""}
+              fullWidth
+              margin="normal"
+              error={!!errors.password}
+              helperText={errors.password?.message}
+            />
+          )}
+        />
 
-        <Controller name="age" control={control} render={({ field }) => (
-          <TextField {...field} label="Age" type="number"value={field.value ?? ""} fullWidth margin="normal" error={!!errors.age} helperText={errors.age?.message} />
-        )} />
+        <Controller
+          name="confirmPassword"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Confirm Password"
+              value={field.value ?? ""}
+              type="password"
+              fullWidth
+              margin="normal"
+            />
+          )}
+        />
 
-        <Controller name="phoneNumber" control={control} render={({ field }) => (
-          <TextField {...field} label="Phone Number"value={field.value ?? ""} type="number" fullWidth margin="normal" error={!!errors.phoneNumber} helperText={errors.phoneNumber?.message} />
-        )} />
+        <Controller
+          name="age"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Age"
+              type="number"
+              value={field.value ?? ""}
+              fullWidth
+              margin="normal"
+              error={!!errors.age}
+              helperText={errors.age?.message}
+            />
+          )}
+        />
 
-        <Controller name="image" control={control} render={({ field }) => (
-          <TextField {...field} label="User Photo"value={field.value ?? ""} fullWidth margin="normal" />
-        )} />
+        <Controller
+          name="phoneNumber"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Phone Number"
+              value={field.value ?? ""}
+              type="number"
+              fullWidth
+              margin="normal"
+              error={!!errors.phoneNumber}
+              helperText={errors.phoneNumber?.message}
+            />
+          )}
+        />
 
-        {/* Image Upload Field */}
-        {/* <input type="file" accept="image/*" onChange={handleImageUpload} style={{ marginTop: "16px" }} />
-        {imageError && <Typography color="error">{imageError}</Typography>} */}
-
-        <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+        <Controller
+          name="image"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="User Photo"
+              value={field.value ?? ""}
+              fullWidth
+              margin="normal"
+            />
+          )}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2 }}
+        >
           Register
         </Button>
       </form>
-
-      {/* ToastContainer for toasts */}
-      {/* <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover /> */}
     </Container>
   );
 };

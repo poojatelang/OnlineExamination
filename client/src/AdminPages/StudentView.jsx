@@ -1,72 +1,8 @@
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { Container, Grid, Typography, Paper, CircularProgress, Box, Avatar } from "@mui/material";
-// import {  fetchStudentsStart } from "../Redux/slices/Admin"; // Update with the correct path
-
-// const StudentView = () => {
-//   const dispatch = useDispatch();
-//   const { students, loading, error } = useSelector((state) => state.admin);
-// console.log(students)
-//   // Fetch students when the component mounts
-//   useEffect(() => {
-//     dispatch(fetchStudentsStart());
-//   }, [dispatch]);
-
-//   if (loading) {
-//     return <CircularProgress />;
-//   }
-
-//   if (error) {
-//     return <Typography color="error">Error: {error}</Typography>;
-//   }
-
-//   return (
-//     <Container maxWidth="lg" sx={{ mt: 4 }}>
-//       <Typography variant="h4" gutterBottom>
-//         All Students
-//       </Typography>
-//       <Grid container spacing={3}>
-//         {students.map((student) => (
-//           <Grid item xs={12} sm={6} md={4} key={student.id}>
-//             <Paper elevation={3} sx={{ padding: 2, display: "flex", flexDirection: "column", alignItems: "center" }}>
-//               <Avatar alt={student.name} src={student.image} sx={{ width: 100, height: 100, mb: 2 }} />
-//               <Typography variant="h6">{student.name}</Typography>
-//               <Typography variant="body2">Email: {student.email}</Typography>
-//               <Typography variant="body2">Age: {student.age}</Typography>
-//               <Typography variant="body2">Phone: {student.phoneNumber}</Typography>
-//               <Typography variant="body2">Test Status: {student.testStatus==="attended" ? "Completed" : "Pending"}</Typography>
-//               <Typography variant="body2">Correct Answers: {student.correctAnswers}</Typography>
-//             </Paper>
-//           </Grid>
-//         ))}
-//       </Grid>
-//     </Container>
-//   );
-// };
-
-// export default StudentView;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid, Typography, Paper, CircularProgress, Box, Avatar, Button, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
-import { fetchStudentsStart,deleteStudentsStart } from "../Redux/slices/Admin"; // Update with the correct path
+import { fetchStudentsStart,deleteStudentsStart } from "../Redux/slices/Admin"; 
 
 const StudentView = () => {
   const dispatch = useDispatch();
@@ -74,15 +10,13 @@ const StudentView = () => {
   const [filterStatus, setFilterStatus] = useState("");
   const [filterCorrectAnswers, setFilterCorrectAnswers] = useState("");
 
-  // Fetch students when the component mounts
   useEffect(() => {
     dispatch(fetchStudentsStart());
   }, [dispatch]);
 
-  // Handle delete action
   const handleDelete = (id) => {
     console.log(id)
-    dispatch(deleteStudentsStart(id)); // Add logic in your slice for deleting a student
+    dispatch(deleteStudentsStart(id)); 
   };
 
   // Filter students based on the selected filters

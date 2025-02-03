@@ -18,9 +18,7 @@ const studentSchema = new mongoose.Schema({
     default: "not attended" 
   },
   phoneNumber:{type: Number, required: true},
-  correctAnswers: { type: Number, default: 0 } // Number of correct answers
+  correctAnswers: { type: Number, default: 0 } 
 }, { timestamps: true });
-
-// export default mongoose.model("Student", studentSchema);
 
 module.exports = mongoose.model("Student", studentSchema);

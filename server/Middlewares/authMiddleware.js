@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const Student = require("../models/Student"); // Assuming you have a User model
-require('dotenv').config()
+const Student = require("../models/Student");
+require("dotenv").config();
 
 exports.verifyToken = (req, res, next) => {
   const token = req.header("Authorization");
-console.log(token)
+  console.log(token);
   if (!token) {
     return res.status(403).json({ message: "Access Denied" });
   }
@@ -20,7 +20,6 @@ console.log(token)
     res.status(401).json({ message: "Invalid Token" });
   }
 };
-
 
 exports.protect = (req, res, next) => {
   const token = req.header("Authorization")?.split(" ")[1];
@@ -40,7 +39,3 @@ exports.adminOnly = (req, res, next) => {
   }
   next();
 };
-
-
-
-

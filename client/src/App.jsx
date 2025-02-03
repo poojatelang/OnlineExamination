@@ -21,13 +21,10 @@ import CreateQuestions from "./AdminPages/CreateQuestions";
 import ReadQuestions from "./AdminPages/ReadallQuestions";
 import EditQuestion from "./AdminPages/UpdatePage";
 
-
-
-
 const ProtectedAdminRoute = () => {
   return (
     <ProtectedRouteAdmin>
-      <AdminDashboard/>
+      <AdminDashboard />
     </ProtectedRouteAdmin>
   );
 };
@@ -42,12 +39,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/instruction" element={<Instructions />} />
-          
-         
-
-          <Route path="/admin-dashboard" element={<ProtectedAdminRoute/>} />
-
-
+          <Route path="/admin-dashboard" element={<ProtectedAdminRoute />} />
           {/* Protected route for the quiz page */}
           <Route
             path="/quiz"
@@ -57,19 +49,16 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-
-          {/* Route for result page */}
           <Route path="/result" element={<ResultPage />} />
-
 
           <Route path="/students-view" element={<StudentView />} />
           <Route path="/delete-students" element={<StudentView />} />
 
-          <Route path="/add-questions" element={<CreateQuestions/>} />
-          <Route path="/questions-view" element={<ReadQuestions/>} />
-          <Route path="/update-questions" element={<ReadQuestions/>} />
-          <Route path="/update-questions/:id" element={<EditQuestion/>} />
-          <Route path="/delete-questions" element={<ReadQuestions/>} />
+          <Route path="/add-questions" element={<CreateQuestions />} />
+          <Route path="/questions-view" element={<ReadQuestions />} />
+          <Route path="/update-questions" element={<ReadQuestions />} />
+          <Route path="/update-questions/:id" element={<EditQuestion />} />
+          <Route path="/delete-questions" element={<ReadQuestions />} />
         </Routes>
       </Router>
       <ToastContainer

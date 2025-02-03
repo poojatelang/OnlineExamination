@@ -1,25 +1,15 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProfileRequest } from "../Redux/slices/Student";
-// import { fetchQuestionsRequest } from "../Redux/slices/Quiz";
+import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Typography, Container, Paper } from "@mui/material";
 
 const Instruction = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { student, loading } = useSelector((state) => state.student);
-
-console.log(student)
-// console.log(testStatus)
   const token = localStorage.getItem("token");
-  const userInfo = token ? JSON.parse(localStorage.getItem("userinfo")) : null; // Assuming userInfo is stored in localStorage
-  // const testStatus = token ? JSON.parse(localStorage.getItem("testStatus")) : null; // Assuming userInfo is stored in localStorage
+  const userInfo = token ? JSON.parse(localStorage.getItem("userinfo")) : null; 
 
-  // useEffect(() => {
-  //   dispatch(fetchProfileRequest());
-  // }, [dispatch]);
 
   const handleStartExam = () => {
     if (!student) {
@@ -27,14 +17,12 @@ console.log(student)
       return;
     }
 
-    // if (student.testStatus === "attended") {
     if (userInfo.testStatus === "attended") {
       toast.warning(
         "You have already attended the exam and cannot take it again."
       );
     } else {
-      // dispatch(fetchQuestionsRequest());
-      localStorage.setItem("hasStartedTest", "true"); // Store start test flag
+      localStorage.setItem("hasStartedTest", "true"); 
       navigate("/quiz");
     }
   };
@@ -49,7 +37,6 @@ console.log(student)
         {userInfo && (
           <Typography variant="h6">
             Hello, {userInfo.name}  Status:{" "}
-            {/* {student.testStatus} */}
             {userInfo.testStatus}
           </Typography>
         )}
