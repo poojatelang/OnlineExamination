@@ -34,6 +34,7 @@ const Login = () => {
     }
   }, [isLoggedIn]);
   const onSubmit = (data) => {
+    console.log(data)
     dispatch(loginRequest(data));
   };
   return (
