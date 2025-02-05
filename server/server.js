@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_ATLAS_URL);
 const db = mongoose.connection;
 db.on("error", (error) => console("Error in database connection"));
 db.on("open", () => console.log("Database is Connected..."));

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Base API URL
-const API_URL = "https://onlineexamination-vc7t.onrender.com/api/";
+const API_URL = "http://localhost:3500/api/";
 
 // Create Axios instance
 const api = axios.create({
