@@ -13,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3500;
 
 const corsOptions = {
-  origin: "http://localhost:5173", // Allow frontend origin
+  // origin: "http://localhost:5173", // Allow frontend origin
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allow specific methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
 };
